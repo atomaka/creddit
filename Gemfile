@@ -18,6 +18,9 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'slim-rails'
 gem 'bootstrap-sass'
+gem 'simple_form'
+
+gem 'bcrypt'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
