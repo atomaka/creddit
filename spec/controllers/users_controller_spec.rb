@@ -34,6 +34,12 @@ describe UsersController, type: :controller do
 
         expect(response).to redirect_to signin_path
       end
+
+      it 'should send a notice flash message' do
+        post :create, user: data
+
+        expect(flash[:notice]).to be_present
+      end
     end
 
     context 'with invalid data' do
