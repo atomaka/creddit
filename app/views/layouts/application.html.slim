@@ -8,6 +8,8 @@ html
 
   body
     == render 'navbar'
+    .container
+      == render 'flash_messages'
 
     .container-fluid
       = yield

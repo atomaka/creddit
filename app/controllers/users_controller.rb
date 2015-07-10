@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to signin_path
+      redirect_to signin_path, notice: 'Your user account has been created'
     else
       render :new
     end

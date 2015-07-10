@@ -42,6 +42,12 @@ describe UserSessionsController, type: :controller do
 
         expect(response).to redirect_to(root_path)
       end
+
+      it 'should send notice' do
+        post :create, user_session: data
+
+        expect(flash[:notice]).to be_present
+      end
     end
 
     context 'with invalid credentials' do
@@ -61,12 +67,20 @@ describe UserSessionsController, type: :controller do
         end.to change(UserSession, :count).by(0)
       end
 
-      it 'should render :new' do
+      it 'should redirect to login page' do
         data['username'] = ''
 
         post :create, user_session: data
 
-        expect(response).to render_template(:new)
+        expect(response).to redirect_to signin_path
+      end
+
+      it 'should send an error flash message' do
+        data['username'] = ''
+
+        post :create, user_session: data
+
+        expect(flash[:alert]).to be_present
       end
     end
   end
@@ -103,6 +117,12 @@ describe UserSessionsController, type: :controller do
         delete :destroy
 
         expect(response).to redirect_to(root_path)
+      end
+
+      it 'should send a notice' do
+        delete :destroy
+
+        expect(flash[:notice]).to be_present
       end
     end
   end
