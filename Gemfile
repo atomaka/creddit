@@ -28,6 +28,7 @@ group :development do
   gem 'bullet'
   gem 'better_errors'
   gem 'quiet_assets'
+  gem 'metric_fu'
 end
 
 group :development, :test do
@@ -47,4 +48,5 @@ group :test do
   gem 'faker'
   gem 'capybara-webkit'
   gem 'shoulda'
+  gem 'simplecov', require: false
 end

@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 describe UsersController, type: :controller do
+  describe '#new' do
+    it 'should render :new' do
+      get :new
+
+      expect(response).to render_template(:new)
+    end
+
+    it 'should assign new User to @user' do
+      get :new
+
+      expect(assigns(:user)).to be_a_new(User)
+    end
+  end
+
   describe '#create' do
     let(:data) do
       {
