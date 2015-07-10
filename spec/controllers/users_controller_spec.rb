@@ -29,7 +29,11 @@ describe UsersController, type: :controller do
         expect { post :create, user: data }.to change(User, :count).by(1)
       end
 
-      it 'should redirect to the login page'
+      it 'should redirect to the login page' do
+        post :create, user: data
+
+        expect(response).to redirect_to signin_path
+      end
     end
 
     context 'with invalid data' do

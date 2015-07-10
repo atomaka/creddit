@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render :create
+      redirect_to signin_path
     else
       render :new
     end
