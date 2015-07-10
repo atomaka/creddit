@@ -29,6 +29,7 @@ group :development do
   gem 'better_errors'
   gem 'quiet_assets'
   gem 'metric_fu'
+  gem 'binding_of_caller'
 end
 
 group :development, :test do
