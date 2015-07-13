@@ -9,6 +9,12 @@ describe User, type: :model do
     it 'should be valid' do
       expect(user).to be_valid
     end
+
+    it 'should downcase emails' do
+      user.email = 'UPPERCASE@BADMAIL.COM'
+      user.save
+      expect(user.email).to eq('uppercase@badmail.com')
+    end
   end
 
   context 'with invalid data' do
@@ -26,12 +32,6 @@ describe User, type: :model do
     it 'should not allow blank emails' do
       user.email = ''
       expect(user).to be_invalid
-    end
-
-    it 'should downcase emails' do
-      user.email = 'UPPERCASE@BADMAIL.COM'
-      user.save
-      expect(user.email).to eq('uppercase@badmail.com')
     end
 
     it 'should not allow duplicate emails' do
