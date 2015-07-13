@@ -50,4 +50,5 @@ group :test do
   gem 'capybara-webkit'
   gem 'shoulda'
   gem 'simplecov', require: false
+  gem 'timecop'
 end
