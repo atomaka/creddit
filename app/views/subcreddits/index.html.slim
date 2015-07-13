@@ -1,0 +1,7 @@
+= link_to 'Create', new_subcreddit_path
+
+ul
+  - @subcreddits.each do |subcreddit|
+    li
+      = link_to subcreddit.name, subcreddit
+      == " (#{link_to 'Edit', edit_subcreddit_path(subcreddit)})"

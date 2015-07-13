@@ -1,0 +1,8 @@
+= simple_form_for subcreddit do |f|
+  .form-inputs
+    - if subcreddit.new_record?
+      = f.input :name
+    - unless subcreddit.new_record?
+      = f.input :closed, as: :boolean, input_html: { checked: subcreddit.closed? }
+  .form-actions
+    = f.button :submit
