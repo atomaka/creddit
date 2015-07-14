@@ -16,6 +16,7 @@ require 'capybara/rspec'
 require 'support/capybara'
 require 'support/database_cleaner'
 require 'support/factory_girl'
+require 'support/helpers'
 
 ActiveRecord::Migration.maintain_test_schema!
 
