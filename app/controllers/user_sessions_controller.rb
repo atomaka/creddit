@@ -11,7 +11,7 @@ class UserSessionsController < ApplicationController
     if authenticate_user?(user)
       create_user_session(user)
 
-      redirect_to root_path, notice: 'You have been logged in!'
+      redirect_to root_path, notice: 'You have been signed in!'
     else
       redirect_to signin_path, alert: 'Username or password was incorrect!'
     end
@@ -21,7 +21,7 @@ class UserSessionsController < ApplicationController
     cookies.permanent[:user_session] = nil
     current_session.destroy if current_session
 
-    redirect_to root_path, notice: 'You have been logged out!'
+    redirect_to root_path, notice: 'You have been signed out!'
   end
 
   private
