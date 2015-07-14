@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   get 'signin', to: 'user_sessions#new', as: :signin
   get 'signout', to: 'user_sessions#destroy', as: :signout
 
-  resources :subcreddits, path: 'c', except: [:destroy]
+  resources :subcreddits, path: 'c', except: [:destroy] do
+    resources :posts, except: [:index]
+  end
+
   resources :user_sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create]
 
