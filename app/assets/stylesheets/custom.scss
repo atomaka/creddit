@@ -5,3 +5,97 @@ $navbar-default-link-hover-color: #369;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.sidebar {
+  display: block;
+
+  .input-group {
+    margin-bottom: 5px;
+  }
+
+  .title {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+    color: grey;
+    font-size: 1em;
+  }
+
+  .box {
+    padding: 5px;
+    border: solid 1px grey;
+    font-size: .8em;
+
+
+    ul {
+      list-style: none;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+      list-style-type: none;
+      margin: 0;
+    }
+  }
+}
+
+.navbar {
+  .logo {
+    margin-top: 3px;
+    margin-right: 10px;
+  }
+}
+
+.posts {
+  .post {
+    p {
+      margin-bottom: 1px;
+    }
+
+    .title {
+      font-size: 1.2em;
+    }
+
+    .details {
+      font-size: .8em;
+    }
+
+    .links {
+      font-size: .8em;
+    }
+
+    .content {
+      border: 1px solid #369;
+      background-color: #fafafa;
+      border-radius: 7px; // need to work all browsers
+      padding: 5px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    list-style: none;
+    list-style-type: none;
+  }
+
+  li:first-child {
+    padding-left: 0px;
+  }
+}
+
+.navbar-custom {
+  margin-bottom: 7px;
+}
+
+.main {
+  margin: 0 5px 0 5px;
+}

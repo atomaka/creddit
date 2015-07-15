@@ -1,0 +1,21 @@
+.sidebar
+  .input-group
+    input.form-control type="text" placeholder="search"
+    span.input-group-btn
+      button.btn.btn-default type="button"
+        span.glyphicon.glyphicon-search aria-hidden="true"
+
+  - if @subcreddit && @subcreddit.id
+    = link_to 'Submit a new link', new_subcreddit_post_path(@subcreddit), class: 'button btn btn-primary btn-block'
+    = link_to 'Submit a new text post', new_subcreddit_post_path(@subcreddit), class: 'button btn btn-primary btn-block'
+  = link_to 'Create your own subcreddit', new_subcreddit_path, class: 'button btn btn-primary btn-block'
+
+  - if @subcreddit && @subcreddit.id
+    .title Moderation Tools
+    .box
+      ul
+        li= link_to 'subcreddit settings', edit_subcreddit_path(@subcreddit)
+    .title Moderators
+    .box
+      ul
+        li= @subcreddit.owner.username

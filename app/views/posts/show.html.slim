@@ -1,2 +1,18 @@
-h1= @post.title
-= @post.content
+.posts
+  .post.show
+    p.title= link_to @post.title, [@subcreddit, @post]
+    p.details= "submitted #{distance_of_time_in_words @post.created_at, Time.now} ago by #{@post.user.username}"
+    ul.links.list-inline
+      li= link_to 'XXX comments', ''
+      li= link_to 'source', ''
+      li= link_to 'share', ''
+      li= link_to 'save', ''
+      li= link_to 'hide', ''
+      li= link_to 'give gold', ''
+      li= link_to 'spam', ''
+      li= link_to 'remove', ''
+      li= link_to 'approve', ''
+      li= link_to 'report', ''
+      li= link_to 'nsfw', ''
+      li= link_to 'hide all child comments', ''
+    p.content= @post.content

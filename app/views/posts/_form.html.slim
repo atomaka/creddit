@@ -1,7 +1,8 @@
-= simple_form_for [subcreddit, post] do |f|
-  .form-inputs
-    = f.input :title
-    = f.input :link
-    = f.input :content
-  .form-actions
-    = f.button :submit
+.col-md-9
+  = simple_form_for [subcreddit, post] do |f|
+    .form-inputs
+      = f.input :title, class: 'inline-block'
+      = f.input :link
+      = f.input :content
+    .form-actions
+      = f.button :submit
