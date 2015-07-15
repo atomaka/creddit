@@ -1,3 +1,8 @@
 h1= @subcreddit.name
 - if @subcreddit.closed?
   = "Board has been closed"
+- else
+  = link_to 'New Post', new_subcreddit_post_path(@subcreddit)
+  ul
+  - @subcreddit.posts.each do |post|
+    li= link_to post.title, [@subcreddit, post]

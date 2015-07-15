@@ -2,6 +2,7 @@ RESERVED_SLUGS = %w(new edit)
 
 class Subcreddit < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
+  has_many :posts
 
   attr_accessor :closed
 
