@@ -45,6 +45,6 @@ class SubcredditsController < ApplicationController
   end
 
   def set_subcreddit
-    @subcreddit = Subcreddit.find_by_slug(params[:id])
+    @subcreddit = Subcreddit.friendly.find(params[:id])
   end
 end

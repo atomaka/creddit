@@ -20,6 +20,8 @@ gem 'slim-rails'
 gem 'bootstrap-sass'
 gem 'simple_form'
 
+gem 'friendly_id', '~> 5.1.0'
+
 gem 'bcrypt'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
