@@ -1,0 +1,13 @@
+.comment
+  p.details= "#{comment.user_username} X points #{distance_of_time_in_words comment.created_at, Time.now} ago"
+  p.content= comment.content
+  ul.links.list-inline
+    li= link_to 'permalink', subcreddit_post_comment_path(subcreddit, post, comment)
+    li= link_to 'save', ''
+    - if comment.parent
+      li= link_to 'parent', subcreddit_post_comment_path(subcreddit, post, comment.parent)
+    li= link_to 'edit', edit_subcreddit_post_comment_path(subcreddit, post, comment)
+    li= link_to 'delete', subcreddit_post_comment_path(subcreddit, post, comment), method: :delete
+    li= link_to 'spam', ''
+    li= link_to 'remove', ''
+    li= link_to 'give gold', ''

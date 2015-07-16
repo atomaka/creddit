@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_filter :set_subcreddit
 
   def show
+    @comments = @post.comments.arrange(order: :created_at)
   end
 
   def new

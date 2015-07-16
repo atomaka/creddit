@@ -41,6 +41,8 @@ GEM
       ice_nine (~> 0.11.0)
       memoizable (~> 0.4.0)
     addressable (2.3.8)
+    ancestry (2.1.0)
+      activerecord (>= 3.0.0)
     arel (6.0.0)
     arrayfields (4.9.2)
     ast (2.0.0)
@@ -365,6 +367,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ancestry
   bcrypt
   better_errors
   binding_of_caller

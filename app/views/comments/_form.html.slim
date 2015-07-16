@@ -1,0 +1,7 @@
+= simple_form_for [subcreddit, post, comment] do |f|
+  - if local_assigns.has_key?(:parent) && parent
+    = f.hidden_field :parent_id, value: parent.id
+  .form-inputs
+    = f.input :content, label: false
+  .form-actions
+    = f.button :submit

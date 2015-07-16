@@ -6,11 +6,11 @@ module ApplicationHelper
   private
 
   def bootstrap_classes
-  {
-    'alert'   => 'alert-warning',
-    'error'   => 'alert-danger',
-    'notice'  => 'alert-info',
-    'success' => 'alert-success'
-  }
-end
+    {
+      'alert'   => 'alert-warning',
+      'error'   => 'alert-danger',
+      'notice'  => 'alert-info',
+      'success' => 'alert-success'
+    }
+  end
 end
