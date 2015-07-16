@@ -1,8 +1,13 @@
-h1= @subcreddit.name
 - if @subcreddit.closed?
   = "Board has been closed"
 - else
-  = link_to 'New Post', new_subcreddit_post_path(@subcreddit)
-  ul
-  - @subcreddit.posts.each do |post|
-    li= link_to post.title, [@subcreddit, post]
+  .posts
+    ul
+      - @subcreddit.posts.order('created_at DESC').each_with_index do |post, rank|
+        li
+          .post
+            p.title= link_to post.title, [@subcreddit, post]
+            p.details= "submitted #{distance_of_time_in_words post.created_at, Time.now} ago by #{post.user.username}"
+            ul.links.list-inline
+              li= link_to 'XXX comments', ''
+              li= link_to 'share', ''
