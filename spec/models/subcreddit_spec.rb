@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+require 'securerandom'
+
 describe Subcreddit, type: :model do
   let(:subcreddit) { build(:subcreddit) }
 
@@ -13,12 +15,6 @@ describe Subcreddit, type: :model do
     it 'should allow spaces in the name' do
       subcreddit.name = 'Testing Spaces'
       expect(subcreddit).to be_valid
-    end
-
-    it 'should sluggify the name' do
-      subcreddit.name = 'Testing Spaces 1'
-      subcreddit.save
-      expect(subcreddit.slug).to eq('testing_spaces_1')
     end
 
     it 'should set closed_at if closed is true and closed_at is nil' do
@@ -92,15 +88,8 @@ describe Subcreddit, type: :model do
       expect(duplicate).to be_invalid
     end
 
-    it 'should not allow duplicate names (case insensitive)' do
-      original = create(:subcreddit)
-      duplicate = build(:subcreddit, name: original.name.upcase)
-
-      expect(duplicate).to be_invalid
-    end
-
-    it 'should not use a reserved keyword' do
-      subcreddit.name = 'New'
+    it 'should not allow a slug with a UUID' do
+      subcreddit.slug = "test-#{SecureRandom.uuid}"
 
       expect(subcreddit).to be_invalid
     end
