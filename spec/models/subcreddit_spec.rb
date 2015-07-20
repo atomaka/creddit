@@ -7,6 +7,8 @@ describe Subcreddit, type: :model do
 
   it { should belong_to(:owner).class_name('User') }
 
+  it { should delegate_method(:username).to(:owner).with_prefix }
+
   context 'with valid data' do
     it 'should be valid' do
       expect(subcreddit).to be_valid

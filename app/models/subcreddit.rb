@@ -8,6 +8,8 @@ class Subcreddit < ActiveRecord::Base
 
   attr_accessor :closed
 
+  delegate :username, to: :owner, prefix: true
+
   before_save :set_closed_at
 
   validates :name,

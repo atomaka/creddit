@@ -6,6 +6,8 @@ describe Post, type: :model do
   it { should belong_to(:user) }
   it { should belong_to(:subcreddit) }
 
+  it { should delegate_method(:username).to(:user).with_prefix }
+
   context 'with valid data' do
     it 'should be valid' do
       expect(post).to be_valid
