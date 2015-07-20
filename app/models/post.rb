@@ -2,6 +2,8 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :subcreddit
 
+  delegate :username, to: :user, prefix: true
+
   validates :title,
     presence: true,
     length: { maximum: 300 }
