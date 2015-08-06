@@ -1,3 +1,4 @@
+- content_for(:title) { link_to @subcreddit.name, @subcreddit }
 - if @subcreddit.closed?
   = "Board has been closed"
 - else
