@@ -24,8 +24,9 @@ describe 'Edit Post', type: :feature do
         expect(page).to have_content('updated')
       end
 
-      it 'should show the post' do
+      it 'should show the updated post' do
         expect(page).to have_content(new_post.title)
+        expect(page).to have_content(new_post.content)
       end
     end
   end

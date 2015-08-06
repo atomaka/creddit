@@ -9,7 +9,7 @@ describe 'List Posts', type: :feature do
 
     posts.each do |post|
       expect(page)
-        .to have_link(post.title, subcreddit_post_path(post, post.subcreddit))
+        .to have_link(post.title, subcreddit_post_path(post.subcreddit, post))
     end
   end
 end

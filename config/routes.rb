@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get 'signout', to: 'user_sessions#destroy', as: :signout
 
   resources :subcreddits, path: 'c', except: [:destroy] do
-    resources :posts, except: [:index]
+    resources :posts, path: '', constraints: { id: /\d+\-.+/ }, except: [:index] do
+      resources :comments, path: '', constraints: { id: /\d+/ }, except: [:index]
+    end
   end
 
   resources :user_sessions, only: [:new, :create, :destroy]

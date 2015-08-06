@@ -42,6 +42,10 @@ $navbar-default-link-hover-color: #369;
   }
 }
 
+.links {
+  font-size: .8em;
+}
+
 .navbar {
   .logo {
     margin-top: 3px;
@@ -49,32 +53,7 @@ $navbar-default-link-hover-color: #369;
   }
 }
 
-.posts {
-  .post {
-    p {
-      margin-bottom: 1px;
-    }
-
-    .title {
-      font-size: 1.2em;
-    }
-
-    .details {
-      font-size: .8em;
-    }
-
-    .links {
-      font-size: .8em;
-    }
-
-    .content {
-      border: 1px solid #369;
-      background-color: #fafafa;
-      border-radius: 7px; // need to work all browsers
-      padding: 5px;
-    }
-  }
-
+.contents {
   ul {
     list-style: none;
     list-style-type: none;
@@ -90,6 +69,38 @@ $navbar-default-link-hover-color: #369;
   li:first-child {
     padding-left: 0px;
   }
+
+  p {
+    margin-bottom: 1px;
+  }
+
+  .title {
+    font-size: 1.2em;
+  }
+
+  .details {
+    font-size: .8em;
+  }
+}
+
+.posts {
+  .post {
+    margin: 0 0 15px 0;
+
+    .content {
+      margin: 4px 0 4px 0;
+      border: 1px solid #369;
+      background-color: #fafafa;
+      border-radius: 7px; // need to work all browsers
+      padding: 5px;
+    }
+  }
+}
+
+.comments {
+  .comment {
+    margin: 15px 0 15px 0;
+  }
 }
 
 .navbar-custom {
@@ -98,4 +109,16 @@ $navbar-default-link-hover-color: #369;
 
 .main {
   margin: 0 5px 0 5px;
+}
+
+.title {
+  font-size: 1.3em;
+}
+
+.nested_comments {
+  margin-left: 50px;
+}
+
+.in-page {
+  padding: 5px;
 }

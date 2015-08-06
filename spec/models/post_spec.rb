@@ -5,8 +5,19 @@ describe Post, type: :model do
 
   it { should belong_to(:user) }
   it { should belong_to(:subcreddit) }
+  it { should have_many(:comments) }
 
   it { should delegate_method(:username).to(:user).with_prefix }
+
+  context 'when adding a comment' do
+    let(:post) { create(:post) }
+
+    it 'should update the cache_counter for comments' do
+      expect do
+        create(:comment, post: post)
+      end.to change { post.comments_count }.by(1)
+    end
+  end
 
   context 'with valid data' do
     it 'should be valid' do
@@ -51,6 +62,26 @@ describe Post, type: :model do
       post.save
 
       expect(post.to_param).to eq("#{post.id}-#{post.title.parameterize}")
+    end
+  end
+
+  context '#comments?' do
+    let(:post) { create(:post) }
+
+    context 'with comments' do
+      before(:each) do
+        create(:comment, post: post)
+      end
+
+      it 'should respond with true' do
+        expect(post.comments?).to be(true)
+      end
+    end
+
+    context 'without comments' do
+      it 'should respond with false' do
+        expect(post.comments?).to be(false)
+      end
     end
   end
 end
