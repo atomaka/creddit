@@ -1,0 +1,5 @@
+h1 #{@user.username}
+
+.comments.contents
+  - @comments.each do |comment|
+    == render 'comments/comment', subcreddit: comment.post.subcreddit, post: comment.post, comment: comment

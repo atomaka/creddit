@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  def show
+    @user = User.friendly.find(params[:id])
+    @comments = @user.comments
+  end
+
   def new
     @user = User.new
   end

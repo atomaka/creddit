@@ -1,9 +1,14 @@
 require 'rails_helper'
 
+require 'securerandom'
+
 describe User, type: :model do
   let(:user) { build(:user) }
 
   it { should have_secure_password }
+
+  it { should have_many :comments }
+  it { should have_many :posts }
 
   context 'with valid data' do
     it 'should be valid' do
@@ -42,6 +47,12 @@ describe User, type: :model do
 
     it 'should not allow short passwords' do
       user.password = 'a' * 4
+      expect(user).to be_invalid
+    end
+
+    it 'should not allow a slug with a UUID' do
+      user.slug = "test-#{SecureRandom.uuid}"
+
       expect(user).to be_invalid
     end
   end

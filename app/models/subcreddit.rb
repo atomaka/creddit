@@ -16,12 +16,11 @@ class Subcreddit < ActiveRecord::Base
     presence: true,
     format: /\A(?! )[a-z0-9 ]*(?<! )\z/i,
     uniqueness: true, #{ case_sensitive: false },
-    length: { minimum: 3, maximum: 21 }
+    length: { minimum: 3, maximum: 21 },
+    sluguuidless: true
 
   validates :closed,
     format: /\A[01]?\z/
-
-  validate :slug_does_not_have_uuid
 
   def closed?
     self.closed_at != nil
@@ -34,12 +33,6 @@ class Subcreddit < ActiveRecord::Base
       self.closed_at = Time.now
     elsif closed == '0' && closed_at != nil
       self.closed_at = nil
-    end
-  end
-
-  def slug_does_not_have_uuid
-    if self.slug.match /([a-z0-9]+\-){4}[a-z0-9]+\z/
-      errors.add(:name, 'must be unique')
     end
   end
 end

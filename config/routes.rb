@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :user_sessions, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create]
+  resources :users, path: 'u', only: [:show, :new, :create]
 
   root to: 'subcreddits#index'
 end

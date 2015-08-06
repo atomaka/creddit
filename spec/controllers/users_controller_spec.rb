@@ -1,6 +1,25 @@
 require 'rails_helper'
 
 describe UsersController, type: :controller do
+  describe '#show' do
+    let(:user) { create(:user) }
+    before(:each) { get :show, id: user }
+
+    it 'should render :show' do
+      expect(response).to render_template(:show)
+    end
+
+    it 'should assign user comments to @comments' do
+      comments = 5.times.collect { create(:comment, user: user) }
+
+      expect(assigns(:comments)).to eq(comments)
+    end
+
+    it 'should assign requested User to @user' do
+      expect(assigns(:user)).to eq(user)
+    end
+  end
+
   describe '#new' do
     it 'should render :new' do
       get :new

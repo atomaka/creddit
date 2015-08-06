@@ -1,7 +1,9 @@
 .posts.contents
   .post.show
     p.title= link_to post.title, [post.subcreddit, post]
-    p.details= "submitted #{distance_of_time_in_words post.created_at, Time.now} ago by #{post.user_username}"
+    p.details
+      = "submitted #{distance_of_time_in_words post.created_at, Time.now} ago by "
+      == link_to post.user_username, post.user
     p.content= post.content
     ul.links.list-inline
       li= link_to "#{post.comments_count} comments", subcreddit_post_path(post.subcreddit, post)
