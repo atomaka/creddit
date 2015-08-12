@@ -29,7 +29,8 @@ describe SubcredditsController, type: :controller do
   end
 
   describe '#show' do
-    let(:subcreddit) { create(:subcreddit) }
+    let!(:subcreddit) { create(:subcreddit) }
+    let(:posts) { 5.times.collect { create(:post, subcreddit: subcreddit) } }
     before(:each) { get :show, id: subcreddit }
 
     it 'should render :show' do
@@ -38,6 +39,10 @@ describe SubcredditsController, type: :controller do
 
     it 'should assign the Subcreddit to @subcreddit' do
       expect(assigns(:subcreddit)).to eq(subcreddit)
+    end
+
+    it 'should assign the post to show to @post' do
+      expect(assigns(:posts)).to eq(posts)
     end
   end
 
