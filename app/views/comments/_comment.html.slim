@@ -1,5 +1,7 @@
 .comment
-  p.details= "#{comment.user_username} X points #{distance_of_time_in_words comment.created_at, Time.now} ago"
+  p.details
+    == link_to comment.user_username, comment.user
+    = " X points #{distance_of_time_in_words comment.created_at, Time.now} ago"
   p.content= comment.content
   ul.links.list-inline
     li= link_to 'permalink', subcreddit_post_comment_path(subcreddit, post, comment)

@@ -26,4 +26,20 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe '#page_header' do
+    context 'when title is provided' do
+      it 'should return the set title' do
+        allow(helper).to receive(:content_for).with(:title).and_return('Test')
+
+        expect(helper.page_header).to eq 'Test'
+      end
+    end
+
+    context 'when title is not provided' do
+      it 'should return blank' do
+        expect(helper.page_header).to be_blank
+      end
+    end
+  end
 end

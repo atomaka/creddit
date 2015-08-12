@@ -1,3 +1,4 @@
+- content_for(:title, link_to(@subcreddit.name, @subcreddit))
 == render 'post', post: @post
 - if @post.comments?
   .title= "all #{@post.comments_count} comments"

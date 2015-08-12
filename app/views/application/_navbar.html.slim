@@ -10,8 +10,7 @@
       = link_to 'Creddit', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        - if @subcreddit && @subcreddit.name
-          li= link_to @subcreddit.name, @subcreddit
+        li= page_header
       ul.nav.navbar-nav.navbar-right
         - if logged_in?
           li= link_to 'Sign Out', signout_path

@@ -3,6 +3,10 @@ module ApplicationHelper
     bootstrap_classes[flash_type] || flash_type.to_s
   end
 
+  def page_header
+    content_for(:title) || ''
+  end
+
   private
 
   def bootstrap_classes

@@ -1,3 +1,4 @@
+- content_for(:title, link_to(@subcreddit.name, @subcreddit))
 == render 'posts/post', post: @post
 .alert.alert-info.in-page
   p you are viewing a single comment's thread.

@@ -1,0 +1,5 @@
+- content_for(:title, link_to(@user.username, @user))
+
+.comments.contents
+  - @comments.each do |comment|
+    == render 'comments/comment', subcreddit: comment.post.subcreddit, post: comment.post, comment: comment

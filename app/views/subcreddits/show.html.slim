@@ -1,3 +1,4 @@
+- content_for(:title) { link_to @subcreddit.name, @subcreddit }
 - if @subcreddit.closed?
   = "Board has been closed"
 - else
@@ -7,7 +8,9 @@
         li
           .post
             p.title= link_to post.title, subcreddit_post_path(@subcreddit, post)
-            p.details= "submitted #{distance_of_time_in_words post.created_at, Time.now} ago by #{post.user_username}"
+            p.details
+              = "submitted #{distance_of_time_in_words post.created_at, Time.now} ago by "
+              == link_to post.user_username, post.user
             ul.links.list-inline
               li= link_to "#{post.comments_count} comments", subcreddit_post_path(@subcreddit, post)
               li= link_to 'share', ''
