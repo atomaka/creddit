@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :subcreddit do
     owner { create(:user) }
-    name { Faker::Team.name.first(21) } # 21 is the max length...brittle
+    sequence(:name) { |n| Faker::Team.name.first(18) + "#{n}" }
   end
 end
