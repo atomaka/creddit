@@ -1,16 +1,5 @@
-- content_for(:title) { link_to @subcreddit.name, @subcreddit }
-- if @subcreddit.closed?
+- subcreddit_name(@subcreddit)
+- if @subcreddit && @subcreddit.closed?
   = "Board has been closed"
 - else
-  .posts.contents
-    ul
-      - @subcreddit.posts.order('created_at DESC').each_with_index do |post, rank|
-        li
-          .post
-            p.title= link_to post.title, subcreddit_post_path(@subcreddit, post)
-            p.details
-              = "submitted #{distance_of_time_in_words post.created_at, Time.now} ago by "
-              == link_to post.user_username, post.user
-            ul.links.list-inline
-              li= link_to "#{post.comments_count} comments", subcreddit_post_path(@subcreddit, post)
-              li= link_to 'share', ''
+  == render partial: 'posts/post_meta'

@@ -2,6 +2,10 @@ class PostsController < ApplicationController
   before_filter :set_post, except: [:index, :new, :create]
   before_filter :set_subcreddit
 
+  def index
+    @posts = Post.all
+  end
+
   def show
     @comments = @post.comments.arrange(order: :created_at)
   end

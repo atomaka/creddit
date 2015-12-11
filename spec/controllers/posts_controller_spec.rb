@@ -14,6 +14,21 @@ describe PostsController, type: :controller do
       .to receive(:current_user).and_return(user)
   end
 
+  describe '#index' do
+    let(:posts) { 10.times.collect { create(:post) } }
+    before(:each) { get :index }
+
+    it 'should render :index' do
+      expect(response).to render_template(:index)
+    end
+
+    it 'should assign all Posts to @post' do
+      posts.each do |post|
+        expect(assigns(:posts)).to include(post)
+      end
+    end
+  end
+
   describe '#show' do
     let(:post) { create(:post) }
     before(:each) { get :show, subcreddit_id: post.subcreddit, id: post }

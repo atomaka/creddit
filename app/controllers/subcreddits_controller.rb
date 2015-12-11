@@ -6,6 +6,7 @@ class SubcredditsController < ApplicationController
   end
 
   def show
+    @posts = @subcreddit.posts
   end
 
   def new
