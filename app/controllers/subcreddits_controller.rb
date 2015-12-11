@@ -1,3 +1,4 @@
+# controllers/subcreddits_controller.rb
 class SubcredditsController < ApplicationController
   before_filter :set_subcreddit, only: [:show, :edit, :update]
 

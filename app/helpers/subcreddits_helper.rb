@@ -1,9 +1,12 @@
+# helpers/subcreddits__helper.rb
 module SubcredditsHelper
-  def subcreddit_name(subcreddit)
-    if subcreddit
-      content_for(:title) { link_to subcreddit.name, subcreddit }
+  def subcreddit_name(subcreddit = '')
+    if subcreddit.blank?
+      link = link_to 'frontpage', root_path
     else
-      content_for(:title) { link_to 'frontpage', root_path }
+      link =  link_to subcreddit.name, subcreddit
     end
+
+    content_for(:title) { link }
   end
 end

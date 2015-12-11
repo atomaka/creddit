@@ -1,3 +1,4 @@
+# models/user.rb
 class User < ActiveRecord::Base
   extend FriendlyId
 

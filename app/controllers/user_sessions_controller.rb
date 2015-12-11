@@ -1,3 +1,4 @@
+# controllers/user_sessions_controller.rb
 class UserSessionsController < ApplicationController
   def new
     @user_session = UserSession.new

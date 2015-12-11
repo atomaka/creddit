@@ -8,6 +8,7 @@ describe Post, type: :model do
   it { should have_many(:comments) }
 
   it { should delegate_method(:username).to(:user).with_prefix }
+  it { should delegate_method(:slug).to(:subcreddit).with_prefix }
 
   context 'when adding a comment' do
     let(:post) { create(:post) }

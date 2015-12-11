@@ -1,3 +1,4 @@
+# helpers/application_helper.rb
 module ApplicationHelper
   def bootstrap_class_for(flash_type)
     bootstrap_classes[flash_type] || flash_type.to_s

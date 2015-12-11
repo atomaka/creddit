@@ -7,6 +7,7 @@ describe Comment, type: :model do
   it { should belong_to(:post).counter_cache(true) }
 
   it { should delegate_method(:username).to(:user).with_prefix }
+  it { should delegate_method(:subcreddit).to(:post).with_prefix }
 
   context 'with valid data' do
     it 'should be valid' do
