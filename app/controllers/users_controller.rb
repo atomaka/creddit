@@ -1,3 +1,4 @@
+# controllers/users_controller.rb
 class UsersController < ApplicationController
   def show
     @user = User.friendly.find(params[:id])

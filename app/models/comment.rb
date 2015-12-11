@@ -1,3 +1,4 @@
+# models/comment.rb
 class Comment < ActiveRecord::Base
   has_ancestry
 
@@ -5,6 +6,7 @@ class Comment < ActiveRecord::Base
   belongs_to :post, counter_cache: true
 
   delegate :username, to: :user, prefix: true
+  delegate :subcreddit, to: :post, prefix: true
 
   validates :content, presence: true
 

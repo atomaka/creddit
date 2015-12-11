@@ -2,4 +2,4 @@
 - if @subcreddit && @subcreddit.closed?
   = "Board has been closed"
 - else
-  == render partial: 'posts/post_meta'
+  == render 'posts/post_meta', posts: @posts, subcreddit: @subcreddit

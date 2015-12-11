@@ -1,3 +1,4 @@
+# models/user_session.rb
 class UserSession < ActiveRecord::Base
   belongs_to :user
 

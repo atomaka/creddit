@@ -1,3 +1,4 @@
+# models/subcreddit.rb
 class Subcreddit < ActiveRecord::Base
   extend FriendlyId
 

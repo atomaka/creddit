@@ -1,3 +1,4 @@
+# controllers/posts_controller.rb
 class PostsController < ApplicationController
   before_filter :set_post, except: [:index, :new, :create]
   before_filter :set_subcreddit

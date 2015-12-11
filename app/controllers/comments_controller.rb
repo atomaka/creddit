@@ -1,3 +1,4 @@
+# controllers/comments_controller.rb
 class CommentsController < ApplicationController
   before_filter :set_comment, only: [:show, :edit, :update, :destroy]
   before_filter :set_post

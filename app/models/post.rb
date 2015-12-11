@@ -1,3 +1,4 @@
+# models/post.rb
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :subcreddit
@@ -5,6 +6,7 @@ class Post < ActiveRecord::Base
   has_many :comments
 
   delegate :username, to: :user, prefix: true
+  delegate :slug, to: :subcreddit, prefix: true
 
   validates :title,
     presence: true,
