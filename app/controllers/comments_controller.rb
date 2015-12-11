@@ -4,7 +4,10 @@ class CommentsController < ApplicationController
   before_filter :set_subcreddit
 
   def show
-    @comments = @comment.subtree.arrange(order: :created_at)
+    @comments = @comment
+                  .subtree
+                  .includes(:post, :user)
+                  .arrange(order: :created_at)
   end
 
   def new

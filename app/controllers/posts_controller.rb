@@ -3,11 +3,11 @@ class PostsController < ApplicationController
   before_filter :set_subcreddit
 
   def index
-    @posts = Post.all
+    @posts = Post.includes(:subcreddit, :user).all
   end
 
   def show
-    @comments = @post.comments.arrange(order: :created_at)
+    @comments = @post.comments.includes(:user).arrange(order: :created_at)
   end
 
   def new
