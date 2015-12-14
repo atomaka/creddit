@@ -31,7 +31,7 @@ describe ApplicationController, type: :controller do
 
     context 'when not logged in' do
       it 'should return nil' do
-        expect(controller.send(:current_user)).to be_nil
+        expect(controller.send(:current_user)).to be_a(GuestUser)
       end
     end
   end

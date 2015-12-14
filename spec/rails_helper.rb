@@ -12,11 +12,13 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'pundit/rspec'
 
 require 'support/capybara'
 require 'support/database_cleaner'
 require 'support/factory_girl'
 require 'support/helpers'
+require 'support/pundit_matcher'
 
 ActiveRecord::Migration.maintain_test_schema!
 

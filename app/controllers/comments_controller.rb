@@ -3,21 +3,28 @@ class CommentsController < ApplicationController
   before_filter :set_comment, only: [:show, :edit, :update, :destroy]
   before_filter :set_post
   before_filter :set_subcreddit
+  after_action :verify_authorized
 
   def show
     @comments = @comment
                   .subtree
                   .includes(:post, :user)
                   .arrange(order: :created_at)
+
+    authorize @comment
   end
 
   def new
     @comment = Comment.new(params[:parent_id])
+
+    authorize @comment
   end
 
   def create
     @comment = @post.comments.build comment_params
     @comment.user = current_user
+
+    authorize @comment
 
     if @comment.save
       flash[:notice] = 'Comment saved'
@@ -29,9 +36,12 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    authorize @comment
   end
 
   def update
+    authorize @comment
+
     if @comment.update comment_params
       redirect_to subcreddit_post_path(@subcreddit, @post),
         notice: 'Comment updated'
@@ -41,6 +51,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    authorize @comment
+
     @comment.destroy
     redirect_to subcreddit_post_path(@subcreddit, @post),
       notice: 'Comment deleted'

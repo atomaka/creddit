@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true, sluguuidless: true
   validates :password, length: { minimum: 8 }
 
+  def registered?
+    true
+  end
+
   private
 
   def downcase_email

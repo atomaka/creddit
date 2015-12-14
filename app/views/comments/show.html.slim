@@ -3,7 +3,8 @@
 .alert.alert-info.in-page
   p you are viewing a single comment's thread.
   p #{link_to 'view the rest of the comments', subcreddit_post_path(@subcreddit, @post)} →
-= "Commenting as: #{current_user.username}"
-== render 'comments/form', subcreddit: @subcreddit, post: @post, comment: @post.comments.build, parent: @comment
+- if policy(:comment).new?
+  = "Commenting as: #{current_user.username}"
+  == render 'comments/form', subcreddit: @subcreddit, post: @post, comment: @post.comments.build, parent: @comment
 .comments.contents
   == nested_comments(@comments)

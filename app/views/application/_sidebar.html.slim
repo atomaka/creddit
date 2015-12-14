@@ -5,12 +5,14 @@
       button.btn.btn-default type="button"
         span.glyphicon.glyphicon-search aria-hidden="true"
 
-  - if @subcreddit && @subcreddit.id
-    = link_to 'Submit a new link', new_subcreddit_post_path(@subcreddit), class: 'button btn btn-primary btn-block'
-    = link_to 'Submit a new text post', new_subcreddit_post_path(@subcreddit), class: 'button btn btn-primary btn-block'
-  = link_to 'Create your own subcreddit', new_subcreddit_path, class: 'button btn btn-primary btn-block'
+  - if policy(:post).new?
+    - if @subcreddit && @subcreddit.id
+      = link_to 'Submit a new link', new_subcreddit_post_path(@subcreddit), class: 'button btn btn-primary btn-block'
+      = link_to 'Submit a new text post', new_subcreddit_post_path(@subcreddit), class: 'button btn btn-primary btn-block'
+  - if policy(:subcreddit).new?
+    = link_to 'Create your own subcreddit', new_subcreddit_path, class: 'button btn btn-primary btn-block'
 
-  - if @subcreddit && @subcreddit.id
+  - if @subcreddit && @subcreddit.id && policy(@subcreddit).edit?
     .title Moderation Tools
     .box
       ul

@@ -1,13 +1,5 @@
 source 'https://rubygems.org'
 
-def darwin_only(require_as)
-  RbConfig::CONFIG['host_os'] =~ /darwin/ && require_as
-end
-
-def linux_only(require_as)
-  RbConfig::CONFIG['host_os'] =~ /linux/ && require_as
-end
-
 gem 'rails', '4.2.3'
 gem 'sqlite3'
 
@@ -24,6 +16,8 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'ancestry'
 
 gem 'bcrypt'
+
+gem 'pundit'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 

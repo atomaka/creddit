@@ -1,22 +1,31 @@
 # controllers/subcreddits_controller.rb
 class SubcredditsController < ApplicationController
   before_filter :set_subcreddit, only: [:show, :edit, :update]
+  after_action :verify_authorized
 
   def index
     @subcreddits = Subcreddit.all
+
+    authorize Subcreddit
   end
 
   def show
     @posts = @subcreddit.posts
+
+    authorize @subcreddit
   end
 
   def new
     @subcreddit = Subcreddit.new
+
+    authorize @subcreddit
   end
 
   def create
     @subcreddit = Subcreddit.new(create_subcreddit_params)
     @subcreddit.owner = current_user
+
+    authorize @subcreddit
 
     if @subcreddit.save
       redirect_to @subcreddit, notice: 'Subcreddit was created!'
@@ -26,9 +35,12 @@ class SubcredditsController < ApplicationController
   end
 
   def edit
+    authorize @subcreddit
   end
 
   def update
+    authorize @subcreddit
+
     if @subcreddit.update(update_subcreddit_params)
       redirect_to @subcreddit, notice: 'Subcreddit was updated!'
     else
