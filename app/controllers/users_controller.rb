@@ -2,7 +2,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.friendly.find(params[:id])
-    @comments = @user.comments.includes(:post)
+    @comments = @user.comments.includes(post: :subcreddit)
   end
 
   def new
