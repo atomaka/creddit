@@ -10,7 +10,7 @@ class SubcredditsController < ApplicationController
   end
 
   def show
-    @posts = @subcreddit.posts
+    @posts = @subcreddit.posts.includes(:user)
 
     authorize @subcreddit
   end
