@@ -212,6 +212,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pundit (1.0.1)
+      activesupport (>= 3.0.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -387,6 +389,7 @@ DEPENDENCIES
   launchy
   metric_fu
   pry
+  pundit
   quiet_assets
   rails (= 4.2.3)
   rspec-rails
@@ -403,4 +406,4 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
 
 BUNDLED WITH
-   1.10.5
+   1.10.6

@@ -4,7 +4,11 @@ describe 'New Subcreddit', type: :feature do
   before(:each) { signout }
 
   context 'when not signed in' do
-    it 'should not be able to create a new subcreddit'
+    it 'should not be able to create a new subcreddit' do
+      visit new_subcreddit_path
+
+      expect(page).to have_content('not authorized')
+    end
   end
 
   context 'when signed in' do

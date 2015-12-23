@@ -97,24 +97,25 @@ describe SubcredditsController, type: :controller do
 
   describe '#edit' do
     context 'with valid subcreddit' do
-      let(:subcreddit) { create(:subcreddit) }
+      context 'when owner' do
+        let(:subcreddit) { create(:subcreddit, owner: user) }
 
-      it 'should assign @subcreddit to the existing subcreddit' do
-        get :edit, id: subcreddit
+        it 'should assign @subcreddit to the existing subcreddit' do
+          get :edit, id: subcreddit
 
-        expect(assigns(:subcreddit)).to eq(subcreddit)
-      end
+          expect(assigns(:subcreddit)).to eq(subcreddit)
+        end
 
-      it 'should render :edit' do
-        get :edit, id: subcreddit
+        it 'should render :edit' do
+          get :edit, id: subcreddit
 
-        expect(response).to render_template(:edit)
+          expect(response).to render_template(:edit)
+        end
       end
     end
   end
 
   describe '#update' do
-    let(:subcreddit) { create(:subcreddit) }
     let(:data) do
       {
         closed: '1'
@@ -122,39 +123,43 @@ describe SubcredditsController, type: :controller do
     end
 
     context 'wth valid data' do
-      it 'should assign @subcreddit to the existing subcreddit' do
-        put :update, id: subcreddit, subcreddit: data
+      context 'when owner' do
+        let(:subcreddit) { create(:subcreddit, owner: user) }
 
-        expect(assigns(:subcreddit)).to eq(subcreddit)
-      end
+        it 'should assign @subcreddit to the existing subcreddit' do
+          put :update, id: subcreddit, subcreddit: data
 
-      it 'should update the subcreddit' do
-        put :update, id: subcreddit, subcreddit: data
-        subcreddit.reload
+          expect(assigns(:subcreddit)).to eq(subcreddit)
+        end
 
-        expect(subcreddit.closed_at).to_not eq(nil)
-      end
+        it 'should update the subcreddit' do
+          put :update, id: subcreddit, subcreddit: data
+          subcreddit.reload
 
-      it 'should redirect to the subcreddit' do
-        put :update, id: subcreddit, subcreddit: data
+          expect(subcreddit.closed_at).to_not eq(nil)
+        end
 
-        expect(response).to redirect_to(subcreddit_url(subcreddit))
-      end
+        it 'should redirect to the subcreddit' do
+          put :update, id: subcreddit, subcreddit: data
 
-      it 'should display a notice flash message' do
-        put :update, id: subcreddit, subcreddit: data
+          expect(response).to redirect_to(subcreddit_url(subcreddit))
+        end
 
-        expect(flash[:notice]).to be_present
-      end
-    end
+        it 'should display a notice flash message' do
+          put :update, id: subcreddit, subcreddit: data
 
-    context 'with invalid data' do
-      before(:each) { data[:closed] = 'bad' }
+          expect(flash[:notice]).to be_present
+        end
 
-      it 'should render :edit' do
-        put :update, id: subcreddit, subcreddit: data
+        context 'with invalid data' do
+          before(:each) { data[:closed] = 'bad' }
 
-        expect(response).to render_template(:edit)
+          it 'should render :edit' do
+            put :update, id: subcreddit, subcreddit: data
+
+            expect(response).to render_template(:edit)
+          end
+        end
       end
     end
   end

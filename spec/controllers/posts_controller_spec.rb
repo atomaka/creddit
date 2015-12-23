@@ -94,22 +94,23 @@ describe PostsController, type: :controller do
   end
 
   context '#edit' do
-    let!(:post) { create(:post) }
-    before(:each) { get :edit, id: post, subcreddit_id: post.subcreddit }
+    context 'when owner' do
+      let!(:post) { create(:post, user: user) }
+      before(:each) { get :edit, id: post, subcreddit_id: post.subcreddit }
 
-    context 'with valid post' do
-      it 'should render :edit' do
-        expect(response).to render_template(:edit)
-      end
+      context 'with valid post' do
+        it 'should render :edit' do
+          expect(response).to render_template(:edit)
+        end
 
-      it 'should assign correct Post to @post' do
-        expect(assigns(:post)).to eq(post)
+        it 'should assign correct Post to @post' do
+          expect(assigns(:post)).to eq(post)
+        end
       end
     end
   end
 
   context '#update' do
-    let!(:post) { create(:post) }
     let(:data) do
       {
         title: 'New title',
@@ -117,61 +118,67 @@ describe PostsController, type: :controller do
       }
     end
 
-    context 'with valid data' do
-      before(:each) do
-        put :update, id: post, subcreddit_id: post.subcreddit, post: data
+    context 'when owner' do
+      let!(:post) { create(:post, user: user) }
+
+      context 'with valid data' do
+        before(:each) do
+          put :update, id: post, subcreddit_id: post.subcreddit, post: data
+        end
+
+        it 'should assign correct Post to @post' do
+          expect(assigns(:post)).to eq(post)
+        end
+
+        it 'should update the post' do
+          post.reload
+
+          expect(post.title).to eq(data[:title])
+          expect(post.content).to eq(data[:content])
+        end
+
+        it 'should redirect to the post' do
+          expect(response)
+            .to redirect_to(subcreddit_post_path(assigns(:post).subcreddit,
+                                                 assigns(:post)))
+        end
+
+        it 'should display a notice flash message' do
+          expect(flash[:notice]).to be_present
+        end
       end
 
-      it 'should assign correct Post to @post' do
-        expect(assigns(:post)).to eq(post)
-      end
+      context 'with invalid data' do
+        before(:each) { data[:title] = '' }
 
-      it 'should update the post' do
-        post.reload
+        it 'should render :edit' do
+          put :update, id: post, subcreddit_id: post.subcreddit, post: data
 
-        expect(post.title).to eq(data[:title])
-        expect(post.content).to eq(data[:content])
-      end
-
-      it 'should redirect to the post' do
-        expect(response)
-          .to redirect_to(subcreddit_post_path(assigns(:post).subcreddit,
-                                               assigns(:post)))
-      end
-
-      it 'should display a notice flash message' do
-        expect(flash[:notice]).to be_present
-      end
-    end
-
-    context 'with invalid data' do
-      before(:each) { data[:title] = '' }
-
-      it 'should render :edit' do
-        put :update, id: post, subcreddit_id: post.subcreddit, post: data
-
-        expect(response).to render_template(:edit)
+          expect(response).to render_template(:edit)
+        end
       end
     end
   end
 
   context '#destroy' do
-    let!(:post) { create(:post, subcreddit: subcreddit) }
+    context 'when owner' do
+      let!(:post) { create(:post, user: user, subcreddit: subcreddit) }
 
-    it 'should delete the post' do
-      expect { delete :destroy, subcreddit_id: subcreddit, id: post }
-        .to change(Post, :count).by(-1)
-    end
+      it 'should delete the post' do
+        expect { delete :destroy, subcreddit_id: subcreddit, id: post }
+          .to change(Post, :count).by(-1)
+      end
 
-    it 'should redirect to the subcreddit index' do
-      expect(delete :destroy, subcreddit_id: subcreddit, id: post)
-        .to redirect_to(subcreddits_path(subcreddit))
-    end
+      it 'should redirect to the subcreddit index' do
+        expect(delete :destroy, subcreddit_id: subcreddit, id: post)
+          .to redirect_to(subcreddits_path(subcreddit))
+      end
 
-    it 'should flash notify that the post was deleted' do
-      delete :destroy, subcreddit_id: subcreddit, id: post
+      it 'should flash notify that the post was deleted' do
+        delete :destroy, subcreddit_id: subcreddit, id: post
 
-      expect(flash[:notice]).to be_present
+        expect(flash[:notice]).to be_present
+      end
     end
   end
 end

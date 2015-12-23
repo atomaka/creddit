@@ -99,103 +99,111 @@ describe CommentsController, type: :controller do
   end
 
   describe '#edit' do
-    let!(:comment) { create(:comment) }
-    before(:each) do
-      get :edit,
-        id: comment,
-        post_id: comment.post,
-        subcreddit_id: comment.post.subcreddit
-    end
-
-    context 'with valid comment' do
-      it 'should render :edit' do
-        expect(response).to render_template(:edit)
+    context 'when owner' do
+      let!(:comment) { create(:comment, user: user) }
+      before(:each) do
+        get :edit,
+          id: comment,
+          post_id: comment.post,
+          subcreddit_id: comment.post.subcreddit
       end
 
-      it 'should assign correct Comment to @comment' do
-        expect(assigns(:comment)).to eq(comment)
+      context 'with valid comment' do
+        it 'should render :edit' do
+          expect(response).to render_template(:edit)
+        end
+
+        it 'should assign correct Comment to @comment' do
+          expect(assigns(:comment)).to eq(comment)
+        end
       end
     end
   end
 
   context '#update' do
-    let!(:comment) { create(:comment) }
     let(:data) { { content: 'Some edited comment content goes here' } }
 
     context 'with valid data' do
-      before(:each) do
-        put :update,
-          id: comment,
-          post_id: comment.post,
-          subcreddit_id: comment.post.subcreddit,
-          comment: data
+      let!(:comment) { create(:comment, user: user) }
+
+      context 'when owner' do
+        before(:each) do
+          put :update,
+            id: comment,
+            post_id: comment.post,
+            subcreddit_id: comment.post.subcreddit,
+            comment: data
+        end
+
+        it 'should assign correct Comment to @comment' do
+          expect(assigns(:comment)).to eq(comment)
+        end
+
+        it 'should update the comment' do
+          comment.reload
+
+          expect(comment.content).to eq(data[:content])
+        end
+
+        it 'should redirect to the post' do
+          expect(response)
+            .to redirect_to(subcreddit_post_path(assigns(:post).subcreddit,
+                                                 assigns(:post)))
+        end
+
+        it 'should display a notice flash message' do
+          expect(flash[:notice]).to be_present
+        end
       end
 
-      it 'should assign correct Comment to @comment' do
-        expect(assigns(:comment)).to eq(comment)
-      end
+      context 'with invalid data' do
+        before(:each) { data[:content] = '' }
 
-      it 'should update the comment' do
-        comment.reload
+        it 'should render :edit' do
+          put :update,
+            id: comment,
+            post_id: comment.post,
+            subcreddit_id: comment.post.subcreddit,
+            comment: data
 
-        expect(comment.content).to eq(data[:content])
-      end
-
-      it 'should redirect to the post' do
-        expect(response)
-          .to redirect_to(subcreddit_post_path(assigns(:post).subcreddit,
-                                               assigns(:post)))
-      end
-
-      it 'should display a notice flash message' do
-        expect(flash[:notice]).to be_present
-      end
-    end
-
-    context 'with invalid data' do
-      before(:each) { data[:content] = '' }
-
-      it 'should render :edit' do
-        put :update,
-          id: comment,
-          post_id: comment.post,
-          subcreddit_id: comment.post.subcreddit,
-          comment: data
-
-        expect(response).to render_template(:edit)
+          expect(response).to render_template(:edit)
+        end
       end
     end
   end
 
   context '#destroy' do
-    let!(:comment) { create(:comment) }
+    context 'when owner' do
+      let!(:comment) { create(:comment, user: user) }
 
-    it 'should delete the post' do
-      delete :destroy,
-        id: comment,
-        post_id: comment.post,
-        subcreddit_id: comment.post.subcreddit
+      it 'should delete the post' do
+        delete :destroy,
+          id: comment,
+          post_id: comment.post,
+          subcreddit_id: comment.post.subcreddit
 
-      comment.reload
-      expect(comment.destroyed?).to be(true)
-    end
+        comment.reload
+        expect(comment.destroyed?).to be(true)
+      end
 
-    it 'should redirect to the post' do
-      delete :destroy,
-        id: comment,
-        post_id: comment.post,
-        subcreddit_id: comment.post.subcreddit
+      it 'should redirect to the post' do
+        delete :destroy,
+          id: comment,
+          post_id: comment.post,
+          subcreddit_id: comment.post.subcreddit
 
-      expect(response).to redirect_to(subcreddit_post_path(assigns(:subcreddit),
-                                                           assigns(:post)))
-    end
+        expect(response)
+          .to redirect_to(subcreddit_post_path(assigns(:subcreddit),
+                                               assigns(:post)))
+      end
 
-    it 'should send a notice flash message' do
-      delete :destroy,
-        id: comment,
-        post_id: comment.post,
-        subcreddit_id: comment.post.subcreddit
-      expect(flash[:notice]).to be_present
+      it 'should send a notice flash message' do
+        delete :destroy,
+          id: comment,
+          post_id: comment.post,
+          subcreddit_id: comment.post.subcreddit
+        expect(flash[:notice]).to be_present
+      end
     end
   end
 end

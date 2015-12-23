@@ -4,4 +4,5 @@ test:
   - apt-get install -y nodejs libqtwebkit-dev qt4-qmake sqlite3 libsqlite3-dev
   - bundle install --path /cache
   - bundle exec rake db:create RAILS_ENV=test
+  - bundle exec rake db:test:prepare
   - bundle exec rspec

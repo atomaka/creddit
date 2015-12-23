@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 describe 'New Post', type: :feature do
+  let!(:subcreddit) { create(:subcreddit) }
+
   context 'when signed in' do
     let!(:user) { create(:user) }
-    let!(:subcreddit) { create(:subcreddit) }
     let!(:post) { build(:post, subcreddit: subcreddit) }
 
     before(:each) { signin(user: user) }
@@ -44,6 +45,17 @@ describe 'New Post', type: :feature do
       it 'should display errors' do
         expect(page).to have_content("can't be blank")
       end
+    end
+  end
+
+  context 'when not signed in' do
+    let!(:user) { GuestUser.new }
+    let!(:post) { create(:post, subcreddit: subcreddit) }
+
+    it 'should notify user they cannot create' do
+      visit new_subcreddit_post_path(subcreddit)
+
+      expect(page).to have_content 'not authorized'
     end
   end
 end
